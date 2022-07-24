@@ -10,11 +10,11 @@ source:
     folder: qt
     patches:
       # qtbase
-      - patches/qt/0002-qtbase-osx-allow-any-xcrun-in-PATH.patch
-      - patches/qt/0003-qtbase-use-better-clang-optimize-size.patch
-      - patches/qt/0004-qtbase-never-enable-new-dtags.patch
+      - patches/qt/0002-qtbase-osx-allow-any-xcrun-in-PATH.patch    # [not win]
+      - patches/qt/0003-qtbase-use-better-clang-optimize-size.patch  # [not win]
+      - patches/qt/0004-qtbase-never-enable-new-dtags.patch  # [not win]
       # 0005-qtbase-link-xcb-shm.patch
-      - patches/qt/0009-qtbase-fix-hardcoded-sysroot-path.patch
+      - patches/qt/0009-qtbase-fix-hardcoded-sysroot-path.patch  # [not win]
 
       # The following patches are required to compile Qt using native arm64
       # compilers
