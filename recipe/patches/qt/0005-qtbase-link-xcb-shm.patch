@@ -16,7 +16,7 @@ index c51e3ceee3..2b08d84373 100644
              },
              "headers": "xcb/xcb.h",
              "sources": [
--                { "type": "pkgConfig", "args": "xcb >= 1.9" },
+-                { "type": "pkgConfig", "args": "xcb >= 1.11" },
 -                "-lxcb"
 +                { "type": "pkgConfig", "args": "xcb >= 1.9 xcb-shm >= 1.9" },
 +                "-lxcb -lxcb-shm"

@@ -83,12 +83,18 @@ if [[ $(uname) == "Linux" ]]; then
       SKIPS+=(-skip); SKIPS+=(qtlocation)
       SKIPS+=(-skip); SKIPS+=(qt3d)
     fi
-
+    declare -a CONFIG_EXTRA_DEFINES
     if [ ${target_platform} == "linux-aarch64" ] || [ ${target_platform} == "linux-ppc64le" ]; then
         # The -reduce-relations option doesn't seem to pass for aarch64 and ppc64le
         REDUCE_RELOCATIONS=
     else
         REDUCE_RELOCATIONS=-reduce-relocations
+        CONFIG_EXTRA_DEFINES+=("-D" "_X_INLINE=inline")
+        CONFIG_EXTRA_DEFINES+=("-D" "XK_dead_currency=0xfe6f")
+        CONFIG_EXTRA_DEFINES+=("-D" "_FORTIFY_SOURCE=2")
+        CONFIG_EXTRA_DEFINES+=("-D" "FC_WEIGHT_EXTRABLACK=215")
+        CONFIG_EXTRA_DEFINES+=("-D" "FC_WEIGHT_ULTRABLACK=FC_WEIGHT_EXTRABLACK")
+        CONFIG_EXTRA_DEFINES+=("-D" "GLX_GLXEXT_PROTOTYPES")
     fi
 
     ../configure -prefix ${PREFIX} \
@@ -97,6 +103,7 @@ if [[ $(uname) == "Linux" ]]; then
                 -headerdir ${PREFIX}/include/qt \
                 -archdatadir ${PREFIX} \
                 -datadir ${PREFIX} \
+                "${CONFIG_EXTRA_DEFINES[@]}" \
                 -I ${PREFIX}/include \
                 -L ${PREFIX}/lib \
                 -L ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64 \
@@ -121,6 +128,7 @@ if [[ $(uname) == "Linux" ]]; then
                 -plugin-sql-psql \
                 -qt-pcre \
                 -xkbcommon \
+                -xcb -xcb-xlib \
                 -dbus \
                 -no-linuxfb \
                 -no-libudev \
