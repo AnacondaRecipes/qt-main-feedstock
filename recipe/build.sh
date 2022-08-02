@@ -69,6 +69,14 @@ if [[ $(uname) == "Linux" ]]; then
     chmod +x g++ gcc gcc-ar
     export PATH=${PWD}:${PATH}
 
+    if [ ${target_platform} == "linux-64" ]; then
+      # make sure we link not libxbc_aux, libcbx_atom, nor libcbx_event
+      echo "${BUILD_PREFIX}/${HOST} ..."
+      cp -f ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libxcb-aux.so.0.0.0 ${PREFIX}/lib/libxcb-aux.so.0
+      cp -f ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libxcb-atom.so.1.0.0 ${PREFIX}/lib/libxcb-atom.so.1
+      cp -f ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64/libxcb-event.so.1.0.0 ${PREFIX}/lib/libxcb-event.so.1
+    fi
+
     declare -a SKIPS
     if [[ ${MINIMAL_BUILD} == yes ]]; then
       SKIPS+=(-skip); SKIPS+=(qtwebsockets)
