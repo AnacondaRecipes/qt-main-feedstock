@@ -36,7 +36,7 @@ source:
     sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
 
 build:
-  number: 6
+  number: 7
   version: {{ version }}
   detect_binary_files_with_prefix: true
   skip: true   # [ppc64le or s390x]
@@ -99,11 +99,11 @@ requirements:
     - {{ cdt('libglvnd-glx') }}          # [linux and not x86_64]
     - {{ cdt('libglvnd-egl') }}          # [linux and not x86_64]
     - {{ cdt('libxkbcommon-devel') }}    # [linux and not (aarch64 or x86_64)]
-    - {{ cdt('xcb-util-devel') }}        # [linux and not aarch64]
-    - {{ cdt('xcb-util-image-devel') }}  # [linux and not aarch64]
-    - {{ cdt('xcb-util-keysyms-devel') }}     # [linux and not aarch64]
-    - {{ cdt('xcb-util-renderutil-devel') }}  # [linux and not aarch64]
-    - {{ cdt('xcb-util-wm-devel') }}          # [linux and not aarch64]
+    - {{ cdt('xcb-util-devel') }}        # [linux]
+    - {{ cdt('xcb-util-image-devel') }}  # [linux]
+    - {{ cdt('xcb-util-keysyms-devel') }}     # [linux]
+    - {{ cdt('xcb-util-renderutil-devel') }}  # [linux]
+    - {{ cdt('xcb-util-wm-devel') }}          # [linux]
     - {{ cdt('cups-devel') }}            # [linux]
     - {{ cdt('libcom_err') }}            # [linux]
     - {{ cdt('gnutls') }}                # [linux]
@@ -130,6 +130,7 @@ requirements:
     # Otherwise build and host might end up with two different versions
     # If they do, merge_build_host will fail.
     - readline                           # [linux]
+    - binutils                           # [linux]
 
   host:
     # For pkg-config gl, fontconfig + freetype
@@ -176,7 +177,7 @@ requirements:
     - {{ pin_compatible("libclang") }}
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
-    - qt {{ version }}
+    - qt >=5.15.2,<6
 test:
   requires:
     - {{ compiler('cxx') }}
