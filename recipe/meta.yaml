@@ -176,7 +176,7 @@ requirements:
     - {{ pin_compatible("libclang") }}
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
-    - qt {{ version }}
+    - qt >=5.15.2,<6
 test:
   requires:
     - {{ compiler('cxx') }}
