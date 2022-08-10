@@ -130,6 +130,7 @@ requirements:
     # Otherwise build and host might end up with two different versions
     # If they do, merge_build_host will fail.
     - readline                           # [linux]
+    - binutils                           # [linux]
 
   host:
     # For pkg-config gl, fontconfig + freetype
