@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: http://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/single/qt-everywhere-src-{{ version }}.tar.xz
+  - url: https://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/single/qt-everywhere-src-{{ version }}.tar.xz
     sha256: 3a530d1b243b5dec00bc54937455471aaa3e56849d2593edb8ded07228202240
     folder: qt
     patches:
@@ -230,14 +230,15 @@ test:
     - if not exist %LIBRARY_PREFIX%\plugins\sqldrivers\qsqlite.dll exit 1  # [win]
 
 about:
-  home: http://qt.io
+  home: https://www.qt.io/
   license: LGPL-3.0-only
   license_file: LICENSE.LGPLv3
+  license_family: LGPL
   summary: 'Qt is a cross-platform application and UI framework.'
   description: |
     Qt helps you create connected devices, UIs & applications that run
     anywhere on any device, on any operating system at any time.
-  doc_url: http://doc.qt.io/
+  doc_url: https://doc.qt.io/
   dev_url: https://github.com/qt
 
 extra:

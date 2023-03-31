@@ -2,6 +2,9 @@
 
 set -e
 
+#sql plugin
+test -f $PREFIX/plugins/sqldrivers/libqsqlite${SHLIB_EXT}
+
 ls
 cd test/qt
 ln -s ${GXX} g++
