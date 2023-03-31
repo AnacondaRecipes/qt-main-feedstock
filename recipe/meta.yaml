@@ -27,6 +27,9 @@ source:
       - patches/qt/linux_x86_64.patch   # [linux and x86_64]
       - patches/qt/linux_aarch64.patch  # [linux and aarch64]
 
+      #qtlocation
+      - patches/qt/0001-add-utility-to-unique_anyhpp.patch 
+
   - url: http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-64-mesa_12_0_rc2.7z      # [win64]
     sha256: 2a0d2f92c60e0962ef5f6039d3793424c6f39e49ba27ac04a5b21ca4ae012e15                                      # [win64]
     folder: opengl32sw                                                                                            # [win64]
@@ -36,17 +39,12 @@ source:
     sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
 
 build:
-  number: 7
+  number: 8
   version: {{ version }}
   detect_binary_files_with_prefix: true
   skip: true   # [ppc64le or s390x]
   run_exports:
     - {{ pin_subpackage('qt-main', max_pin='x.x') }}
-  ignore_run_exports:
-    - openssl
-    - krb5
-    - nss
-    - nspr
   missing_dso_whitelist:  # [osx]
     - /usr/lib/libbsm.0.dylib  # [osx]
     - /usr/lib/libcups.2.dylib  # [osx]
@@ -142,7 +140,7 @@ requirements:
     - gst-plugins-base
     - gstreamer
     - pulseaudio                         # [linux and not (aarch64 or x86_64)]
-    - libxml2                            # [linux]
+    - libxml2 2.10                       # [linux]
     - libxkbcommon                       # [linux]
     - expat                              # [linux]
     - libevent                           # [linux]
@@ -175,6 +173,8 @@ requirements:
     - {{ pin_compatible("nspr") }}       # [unix]
     - libxcb                             # [linux]
     - {{ pin_compatible("libclang") }}
+    - openssl
+    - krb5
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
     - qt >=5.15.2,<6
