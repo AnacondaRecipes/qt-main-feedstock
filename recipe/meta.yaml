@@ -39,7 +39,7 @@ source:
     sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
 
 build:
-  number: 8
+  number: 9
   version: {{ version }}
   detect_binary_files_with_prefix: true
   skip: true   # [ppc64le or s390x]
@@ -113,7 +113,6 @@ requirements:
     - pkg-config                         # [unix]
     - make                               # [unix]
     - ninja
-    - ruby >=2.5                         # [linux]
     - bison                              # [linux]
     - flex                               # [linux]
     - gperf                              # [linux]
@@ -143,38 +142,32 @@ requirements:
     - libxml2 2.10                       # [linux]
     - libxkbcommon                       # [linux]
     - expat                              # [linux]
-    - libevent                           # [linux]
+    - libevent 2.1.12                    # [linux]
     - icu
     # jpeg-turbo currently has some conflicting issues in conda-forge
     # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
     - jpeg
     - libpng
-    - nspr                               # [unix]
-    - nss                                # [unix]
     - sqlite
     # - mysql-devel                        # [not win]
     - mysql                              # [linux]
-    - postgresql                         # [not win]
+    - postgresql 12.15.0                 # [not win]
     - zlib
     - libxcb                             # [linux]
-    - openssl
+    - openssl {{ openssl }}              # [linux]
     # For QDoc
     # http://doc.qt.io/Qt-5/qdoc-guide-clang.html
     # Only libclang is needed, but needs the full package for detection.
     - llvmdev
     - clangdev
     - libclang
-    - libcups                            # [linux]
+    - libcups 2.4.2                      # [linux]
     - zstd
     - alsa-lib                           # [linux and not (aarch64 or x86_64)]
-    - krb5
   run:
-    - {{ pin_compatible("nss") }}        # [unix]
-    - {{ pin_compatible("nspr") }}       # [unix]
     - libxcb                             # [linux]
     - {{ pin_compatible("libclang") }}
-    - openssl
-    - krb5
+    - openssl 3.*                        # [linux]
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
     - qt >=5.15.2,<6
