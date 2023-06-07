@@ -142,7 +142,7 @@ requirements:
     - gstreamer         # [not win]
     - pulseaudio                         # [linux and not (aarch64 or x86_64)]
     - libxkbcommon                       # [linux]
-    - icu
+    - icu 73
     # jpeg-turbo currently has some conflicting issues in conda-forge
     # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
     - jpeg
