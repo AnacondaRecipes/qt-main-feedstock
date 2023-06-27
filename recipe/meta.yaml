@@ -154,7 +154,7 @@ requirements:
     - postgresql 12.15.0                 # [not win]
     - zlib
     - libxcb                             # [linux]
-    - openssl {{ openssl }}              # [linux]
+    - openssl {{ openssl }}
     # For QDoc
     # http://doc.qt.io/Qt-5/qdoc-guide-clang.html
     # Only libclang is needed, but needs the full package for detection.
@@ -167,7 +167,7 @@ requirements:
   run:
     - libxcb                             # [linux]
     - {{ pin_compatible("libclang") }}
-    - openssl 3.*                        # [linux]
+    - openssl  # exact pin handled through openssl run_exports
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
     - qt >=5.15.2,<6
