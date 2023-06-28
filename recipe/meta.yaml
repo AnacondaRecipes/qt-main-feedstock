@@ -167,7 +167,7 @@ requirements:
     - openssl  # exact pin handled through openssl run_exports
     - mysql 5.7.*  # [unix]
     - sqlite
-    - libcups 2.*
+    - libcups 2.*  # [linux]
     - krb5  # exact pin handled through krb5 run_exports
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
