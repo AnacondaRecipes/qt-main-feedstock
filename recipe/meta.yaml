@@ -146,7 +146,7 @@ requirements:
     - jpeg
     - libpng
     - sqlite
-    - mysql 5.7.24
+    - mysql 5.7.24  # [unix]
     - postgresql 12.15
     - zlib
     - libxcb                             # [linux]
@@ -165,7 +165,7 @@ requirements:
     - libxcb                             # [linux]
     - {{ pin_compatible("libclang") }}
     - openssl  # exact pin handled through openssl run_exports
-    - mysql 5.7.*
+    - mysql 5.7.*  # [unix]
     - sqlite
     - libcups 2.*
     - krb5  # exact pin handled through krb5 run_exports

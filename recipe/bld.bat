@@ -95,7 +95,6 @@ call "../configure" ^
      -system-sqlite ^
      -system-zlib ^
      -plugin-sql-sqlite ^
-     -plugin-sql-mysql ^
      -plugin-sql-psql ^
      -qtlibinfix %QT_LIBINFIX% ^
      -verbose
