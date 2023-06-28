@@ -141,7 +141,6 @@ if [[ $(uname) == "Linux" ]]; then
                 ${REDUCE_RELOCATIONS} \
                 -cups \
                 -openssl-linked \
-                -openssl \
                 -Wno-expansion-to-defined \
                 -D _X_INLINE=inline \
                 -D XK_dead_currency=0xfe6f \
@@ -238,6 +237,7 @@ if [[ ${HOST} =~ .*darwin.* ]]; then
                 -system-zlib \
                 -system-sqlite \
                 -plugin-sql-sqlite \
+                -plugin-sql-mysql \
                 -plugin-sql-psql \
                 -qt-freetype \
                 -qt-pcre \

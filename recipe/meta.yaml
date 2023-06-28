@@ -139,22 +139,19 @@ requirements:
     - gst-plugins-base
     - gstreamer
     - pulseaudio                         # [linux and not (aarch64 or x86_64)]
-    - libxml2 2.10                       # [linux]
     - libxkbcommon                       # [linux]
-    - expat                              # [linux]
-    - libevent 2.1.12                    # [linux]
     - icu
     # jpeg-turbo currently has some conflicting issues in conda-forge
     # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
     - jpeg
     - libpng
     - sqlite
-    # - mysql-devel                        # [not win]
-    - mysql                              # [linux]
-    - postgresql 12.15.0                 # [not win]
+    - mysql 5.7.24
+    - postgresql 12.15
     - zlib
     - libxcb                             # [linux]
     - openssl {{ openssl }}
+    - krb5 1.20.1
     # For QDoc
     # http://doc.qt.io/Qt-5/qdoc-guide-clang.html
     # Only libclang is needed, but needs the full package for detection.
@@ -168,6 +165,10 @@ requirements:
     - libxcb                             # [linux]
     - {{ pin_compatible("libclang") }}
     - openssl  # exact pin handled through openssl run_exports
+    - mysql 5.7.*
+    - sqlite
+    - libcups 2.*
+    - krb5  # exact pin handled through krb5 run_exports
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
     - qt >=5.15.2,<6
