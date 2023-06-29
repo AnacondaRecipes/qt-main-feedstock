@@ -247,7 +247,7 @@ if [[ ${HOST} =~ .*darwin.* ]]; then
                 -no-harfbuzz \
                 -no-libudev \
                 -no-egl \
-                -no-openssl \
+                -openssl-linked \
                 -optimize-size
 
 # For quicker turnaround when e.g. checking compilers optimizations
