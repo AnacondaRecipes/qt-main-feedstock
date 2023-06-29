@@ -51,6 +51,8 @@ build:
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libsandbox.1.dylib  # [osx]
     - '/System/Library/Frameworks/CoreLocation.framework/**'  # [osx]
+    - $RPATH/api-ms-win-core-winrt-l1-1-0.dll
+    - $RPATH/api-ms-win-core-winrt-string-l1-1-0.dll
 
 requirements:
   build:
@@ -135,9 +137,9 @@ requirements:
     - dbus                               # [linux]
     - fontconfig                         # [linux]
     - freetype                           # [linux]
-    - glib
-    - gst-plugins-base
-    - gstreamer
+    - glib              # [not win]
+    - gst-plugins-base  # [not win]
+    - gstreamer         # [not win]
     - pulseaudio                         # [linux and not (aarch64 or x86_64)]
     - libxkbcommon                       # [linux]
     - icu
