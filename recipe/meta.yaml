@@ -39,7 +39,7 @@ source:
     sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
 
 build:
-  number: 8
+  number: 9
   version: {{ version }}
   detect_binary_files_with_prefix: true
   skip: true   # [ppc64le or s390x]
@@ -51,6 +51,8 @@ build:
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libsandbox.1.dylib  # [osx]
     - '/System/Library/Frameworks/CoreLocation.framework/**'  # [osx]
+    #- '*/api-ms-win-core-winrt-l1-1-0.dll'  # [win]
+    #- '*/api-ms-win-core-winrt-string-l1-1-0.dll'  # [win]
 
 requirements:
   build:
@@ -113,7 +115,6 @@ requirements:
     - pkg-config                         # [unix]
     - make                               # [unix]
     - ninja
-    - ruby >=2.5                         # [linux]
     - bison                              # [linux]
     - flex                               # [linux]
     - gperf                              # [linux]
@@ -136,45 +137,40 @@ requirements:
     - dbus                               # [linux]
     - fontconfig                         # [linux]
     - freetype                           # [linux]
-    - glib
-    - gst-plugins-base
-    - gstreamer
+    - glib              # [not win]
+    - gst-plugins-base  # [not win]
+    - gstreamer         # [not win]
     - pulseaudio                         # [linux and not (aarch64 or x86_64)]
-    - libxml2 2.10                       # [linux]
     - libxkbcommon                       # [linux]
-    - expat                              # [linux]
-    - libevent                           # [linux]
     - icu
     # jpeg-turbo currently has some conflicting issues in conda-forge
     # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
     - jpeg
     - libpng
-    - nspr                               # [unix]
-    - nss                                # [unix]
     - sqlite
-    # - mysql-devel                        # [not win]
-    - mysql                              # [linux]
-    - postgresql                         # [not win]
+    - mysql 5.7.24  # [unix]
+    - postgresql 12.15
     - zlib
     - libxcb                             # [linux]
-    - openssl
+    - openssl {{ openssl }}
+    - krb5 1.20.1
     # For QDoc
     # http://doc.qt.io/Qt-5/qdoc-guide-clang.html
     # Only libclang is needed, but needs the full package for detection.
     - llvmdev
     - clangdev
     - libclang
-    - libcups                            # [linux]
+    - libcups 2.4.2                      # [linux]
     - zstd
     - alsa-lib                           # [linux and not (aarch64 or x86_64)]
-    - krb5
   run:
-    - {{ pin_compatible("nss") }}        # [unix]
-    - {{ pin_compatible("nspr") }}       # [unix]
     - libxcb                             # [linux]
     - {{ pin_compatible("libclang") }}
-    - openssl
-    - krb5
+    - openssl  # exact pin handled through openssl run_exports
+    - mysql 5.7.*  # [unix]
+    - sqlite
+    - libcups 2.*  # [linux]
+    - krb5  # exact pin handled through krb5 run_exports
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
     - qt >=5.15.2,<6

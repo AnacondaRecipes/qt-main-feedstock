@@ -84,8 +84,7 @@ call "../configure" ^
      -skip qtwebengine ^
      -opengl %OPENGLVER% ^
      -opensource ^
-     -openssl ^
-     -openssl-runtime ^
+     -openssl-linked ^
      -platform win32-msvc ^
      -release ^
      -shared ^
@@ -95,6 +94,7 @@ call "../configure" ^
      -system-sqlite ^
      -system-zlib ^
      -plugin-sql-sqlite ^
+     -plugin-sql-psql ^
      -qtlibinfix %QT_LIBINFIX% ^
      -verbose
 
