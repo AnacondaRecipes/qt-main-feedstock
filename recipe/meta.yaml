@@ -28,7 +28,7 @@ source:
       - patches/qt/linux_aarch64.patch  # [linux and aarch64]
 
       #qtlocation
-      - patches/qt/0001-add-utility-to-unique_anyhpp.patch 
+      - patches/qt/0001-add-utility-to-unique_anyhpp.patch
 
   - url: http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-64-mesa_12_0_rc2.7z      # [win64]
     sha256: 2a0d2f92c60e0962ef5f6039d3793424c6f39e49ba27ac04a5b21ca4ae012e15                                      # [win64]
@@ -39,7 +39,7 @@ source:
     sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
 
 build:
-  number: 9
+  number: 10
   version: {{ version }}
   detect_binary_files_with_prefix: true
   skip: true   # [ppc64le or s390x]
@@ -142,7 +142,7 @@ requirements:
     - gstreamer         # [not win]
     - pulseaudio                         # [linux and not (aarch64 or x86_64)]
     - libxkbcommon                       # [linux]
-    - icu
+    - icu 73
     # jpeg-turbo currently has some conflicting issues in conda-forge
     # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
     - jpeg
