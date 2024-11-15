@@ -30,7 +30,7 @@ source:
       #qtlocation
       - patches/qt/0001-add-utility-to-unique_anyhpp.patch
 
-  - url: http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-64-mesa_12_0_rc2.7z      # [win64]
+  - url: https://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-64-mesa_12_0_rc2.7z     # [win64]
     sha256: 2a0d2f92c60e0962ef5f6039d3793424c6f39e49ba27ac04a5b21ca4ae012e15                                      # [win64]
     folder: opengl32sw                                                                                            # [win64]
 
@@ -39,7 +39,7 @@ source:
     sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
 
 build:
-  number: 10
+  number: 11
   version: {{ version }}
   detect_binary_files_with_prefix: true
   skip: true   # [ppc64le or s390x]
@@ -148,8 +148,8 @@ requirements:
     - jpeg
     - libpng
     - sqlite
-    - mysql 5.7.24  # [unix]
-    - postgresql 12.15
+    - mysql 8.4.0  # [unix]
+    - libpq 17.0
     - zlib
     - libxcb                             # [linux]
     - openssl {{ openssl }}
@@ -167,9 +167,10 @@ requirements:
     - libxcb                             # [linux]
     - {{ pin_compatible("libclang") }}
     - openssl  # exact pin handled through openssl run_exports
-    - mysql 5.7.*  # [unix]
+    - {{ pin_compatible("mysql", max_pin="x.x") }}  # [unix]
     - sqlite
     - libcups 2.*  # [linux]
+    - libpq  # exact pin handled through libpq run_exports
     - krb5  # exact pin handled through krb5 run_exports
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
