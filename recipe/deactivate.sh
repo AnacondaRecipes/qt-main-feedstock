@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# explanation in build.sh
+
+if [ "$CONDA_BACKUP_QT_XCB_GL_INTEGRATION" ];
+then
+    export QT_XCB_GL_INTEGRATION="$CONDA_BACKUP_QT_XCB_GL_INTEGRATION"
+else
+    unset QT_XCB_GL_INTEGRATION
+fi
+unset CONDA_BACKUP_QT_XCB_GL_INTEGRATION
