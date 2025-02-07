@@ -303,3 +303,18 @@ for f in $(find * -iname "*LICENSE*" -or -iname "*COPYING*" -or -iname "*COPYRIG
   rm -rf "$LICENSE_DIR/qtwebengine/src/3rdparty/chromium/third_party/skia/tools/copyright"
 done
 
+# qt-main is currently built with gcc 11 and uses cdts to set dependencies on opengl.
+# On host systems with a recent opengl, qt-main loads the system's libgallium while loading opengl.
+# Recent libgallium depend on GLIBCXX_3.4.30. libstdc++.so.6 from gcc 11 only supports up to GLIBCXX_3.4.29.
+# This causes qt applications relying on opengl integration to crash.
+# Long term solutions are to rebuild this package with a more recent GCC, and/or provide opengl as a conda package.
+# For the time being, we are adding activation scripts to temporarily disable opengl integration.
+if [[ $(uname) == "Linux" ]]; then
+  # Copy the [de]activate scripts to $PREFIX/etc/conda/[de]activate.d.
+  # This will allow them to be run on environment activation.
+  for CHANGE in "activate" "deactivate"
+  do
+      mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
+      cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
+  done
+fi
