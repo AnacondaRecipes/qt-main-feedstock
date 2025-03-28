@@ -1,4 +1,4 @@
-{% set version = "6.7.2" %}
+{% set version = "6.7.3" %}
 {% set next_major_version = version.split(".")[0] | int + 1 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 build:
   number: 0
-  skip: True  # [s390x]
+  skip: True  # [s390x or (osx and x86_64)]
   run_exports:
     - {{ pin_subpackage('qt-main', max_pin='x.x') }}
 
