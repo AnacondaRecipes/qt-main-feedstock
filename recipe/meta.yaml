@@ -42,76 +42,14 @@ build:
   number: 13
   version: {{ version }}
   detect_binary_files_with_prefix: true
-  skip: true   # [ppc64le or s390x]
   run_exports:
     - {{ pin_subpackage('qt-main', max_pin='x.x') }}
-  missing_dso_whitelist:  # [osx]
-    - /usr/lib/libbsm.0.dylib  # [osx]
-    - /usr/lib/libcups.2.dylib  # [osx]
-    - /usr/lib/libresolv.9.dylib  # [osx]
-    - /usr/lib/libsandbox.1.dylib  # [osx]
-    - '/System/Library/Frameworks/CoreLocation.framework/**'  # [osx]
-    #- '*/api-ms-win-core-winrt-l1-1-0.dll'  # [win]
-    #- '*/api-ms-win-core-winrt-string-l1-1-0.dll'  # [win]
 
 requirements:
   build:
     - patch  # [unix]
     - m2-patch  # [win]
     - {{ compiler('cxx') }}
-    - sysroot_linux-64 2.17              # [linux]
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
-    - {{ cdt('libx11-devel') }}          # [linux]
-    - {{ cdt('libxext') }}               # [linux]
-    - {{ cdt('libxext-devel') }}         # [linux]
-    - {{ cdt('libxrender-devel') }}      # [linux]
-    - {{ cdt('mesa-libgl-devel') }}      # [linux]
-    - {{ cdt('mesa-libegl') }}           # [linux]
-    - {{ cdt('mesa-libgbm') }}           # [linux]
-    - {{ cdt('mesa-libegl-devel') }}     # [linux]
-    - {{ cdt('mesa-dri-drivers') }}      # [linux]
-    - {{ cdt('libxau-devel') }}          # [linux]
-    - {{ cdt('alsa-lib-devel') }}        # [linux]
-    - {{ cdt('gtk2-devel') }}            # [linux]
-    - {{ cdt('gtkmm24-devel') }}         # [linux]
-    - {{ cdt('libdrm-devel') }}          # [linux]
-    - {{ cdt('libxcomposite-devel') }}   # [linux]
-    - {{ cdt('libxcursor-devel') }}      # [linux]
-    - {{ cdt('libxi-devel') }}           # [linux]
-    - {{ cdt('libxrandr-devel') }}       # [linux]
-    - {{ cdt('pciutils-devel') }}        # [linux]
-    - {{ cdt('libxscrnsaver-devel') }}   # [linux]
-    - {{ cdt('libxtst-devel') }}         # [linux]
-    - {{ cdt('libselinux') }}            # [linux]
-    - {{ cdt('libselinux-devel') }}      # [linux]
-    - {{ cdt('libxdamage') }}            # [linux]
-    - {{ cdt('libxdamage-devel') }}      # [linux]
-    - {{ cdt('libxfixes') }}             # [linux]
-    - {{ cdt('libxfixes-devel') }}       # [linux]
-    - {{ cdt('libxxf86vm') }}            # [linux]
-    - {{ cdt('libxxf86vm-devel') }}      # [linux]
-    - {{ cdt('libsm-devel') }}           # [linux]
-    - {{ cdt('libice-devel') }}          # [linux]
-    - {{ cdt('libxcb') }}                # [linux]
-    - {{ cdt('libxcb-devel') }}          # [linux and not (aarch64 or x86_64)]
-    - {{ cdt('expat-devel') }}           # [linux and not aarch64]
-    - {{ cdt('pcre') }}                  # [linux and not x86_64]
-    - {{ cdt('libglvnd-glx') }}          # [linux and not x86_64]
-    - {{ cdt('libglvnd-egl') }}          # [linux and not x86_64]
-    - {{ cdt('libxkbcommon-devel') }}    # [linux and not (aarch64 or x86_64)]
-    - {{ cdt('xcb-util-devel') }}        # [linux]
-    - {{ cdt('xcb-util-image-devel') }}  # [linux]
-    - {{ cdt('xcb-util-keysyms-devel') }}     # [linux]
-    - {{ cdt('xcb-util-renderutil-devel') }}  # [linux]
-    - {{ cdt('xcb-util-wm-devel') }}          # [linux]
-    - {{ cdt('cups-devel') }}            # [linux]
-    - {{ cdt('libcom_err') }}            # [linux]
-    - {{ cdt('gnutls') }}                # [linux]
-    - {{ cdt('avahi-libs') }}            # [linux]
-    - {{ cdt('libgpg-error') }}          # [linux]
-    - {{ cdt('libtasn1') }}              # [linux]
-
-    # For fontconfig + freetype
     - pkg-config                         # [unix]
     - make                               # [unix]
     - ninja
@@ -141,7 +79,6 @@ requirements:
     - gst-plugins-base {{ gst_plugins_base }}  # [not win]
     - gstreamer {{ gstreamer }}                # [not win]
     - pulseaudio                         # [linux and not (aarch64 or x86_64)]
-    - libxkbcommon                       # [linux]
     - icu 73
     # jpeg-turbo currently has some conflicting issues in conda-forge
     # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
@@ -151,7 +88,6 @@ requirements:
     - mysql 8.4.0  # [unix]
     - libpq 17.0
     - zlib
-    - libxcb                             # [linux]
     - openssl {{ openssl }}
     - krb5 1.20.1
     # For QDoc
@@ -163,51 +99,29 @@ requirements:
     - libcups 2.4.2                      # [linux]
     - zstd
     - alsa-lib                           # [linux and not (aarch64 or x86_64)]
+    # OpenGL support
+    - libxkbcommon {{ libxkbcommon }}                # [linux]
+    - libxcb {{ libxcb }}                            # [linux]
+    - libgl-devel  {{ libgl }}                       # [linux]
+    - libegl-devel {{ libglvnd }}                    # [linux]
+    - xorg-libxext {{ xorg_libxext }}                # [linux]
+    - xcb-util {{ xcb_util }}                        # [linux]
+    - xcb-util-image {{ xcb_util_image }}            # [linux]
+    - xcb-util-keysyms {{ xcb_util_keysyms }}        # [linux]
+    - xcb-util-renderutil {{ xcb_util_renderutil }}  # [linux]
+    - xcb-util-wm {{ xcb_util_wm }}                  # [linux]
+    - xorg-libice {{ xorg_libice }}                  # [linux]
+    - xorg-libsm {{ xorg_libsm }}                    # [linux]
+    - xorg-libx11 {{ xorg_libx11 }}                  # [linux]
+    - libdrm {{ libdrm }}                            # [linux]
   run:
-    - libxcb                             # [linux]
-    - {{ pin_compatible("libclang") }}
-    - openssl  # exact pin handled through openssl run_exports
-    - {{ pin_compatible("mysql", max_pin="x.x") }}  # [unix]
-    - sqlite
     - libcups 2.*  # [linux]
-    - libpq  # exact pin handled through libpq run_exports
-    - krb5  # exact pin handled through krb5 run_exports
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
     - qt >=5.15.2,<6
 test:
   requires:
     - {{ compiler('cxx') }}
-    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
-    - {{ cdt('libx11-devel') }}          # [linux]
-    - {{ cdt('libxext-devel') }}         # [linux]
-    - {{ cdt('libxrender-devel') }}      # [linux]
-    - {{ cdt('mesa-libgl-devel') }}      # [linux]
-    - {{ cdt('mesa-libegl-devel') }}     # [linux]
-    - {{ cdt('mesa-libgbm') }}           # [linux]
-    - {{ cdt('mesa-dri-drivers') }}      # [linux]
-    - {{ cdt('libxau-devel') }}          # [linux]
-    - {{ cdt('alsa-lib-devel') }}        # [linux]
-    - {{ cdt('gtk2-devel') }}            # [linux]
-    - {{ cdt('gtkmm24-devel') }}         # [linux]
-    - {{ cdt('libdrm-devel') }}          # [linux]
-    - {{ cdt('libxcomposite-devel') }}   # [linux]
-    - {{ cdt('libxcursor-devel') }}      # [linux]
-    - {{ cdt('libxi-devel') }}           # [linux]
-    - {{ cdt('libxrandr-devel') }}       # [linux]
-    - {{ cdt('pciutils-devel') }}        # [linux]
-    - {{ cdt('libxscrnsaver-devel') }}   # [linux]
-    - {{ cdt('libxtst-devel') }}         # [linux]
-    - {{ cdt('libselinux-devel') }}      # [linux]
-    - {{ cdt('libxdamage') }}            # [linux]
-    - {{ cdt('libxdamage-devel') }}      # [linux]
-    - {{ cdt('libxfixes') }}             # [linux]
-    - {{ cdt('libxfixes-devel') }}       # [linux]
-    - {{ cdt('libxxf86vm') }}            # [linux]
-    - {{ cdt('libxcb') }}                # [linux]
-    - {{ cdt('expat-devel') }}           # [linux and not aarch64]
-    - {{ cdt('pcre') }}                  # [linux and not x86_64]
-    - {{ cdt('libglvnd-glx') }}          # [linux and not x86_64]
     - make                               # [unix]
   files:
     - test/qt/hello.pro
