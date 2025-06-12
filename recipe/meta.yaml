@@ -115,7 +115,8 @@ requirements:
     - xorg-libx11 {{ xorg_libx11 }}                  # [linux]
     - libdrm {{ libdrm }}                            # [linux]
   run:
-    - libcups 2.*  # [linux]
+    - {{ pin_compatible("libcups", max_pin="x") }}  # [linux]
+    - {{ pin_compatible("mysql", max_pin="x.x") }}  # [unix]
   run_constrained:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
     - qt >=5.15.2,<6
