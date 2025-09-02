@@ -1,4 +1,4 @@
-{% set version = "6.7.3" %}
+{% set version = "6.9.1" %}
 {% set next_major_version = version.split(".")[0] | int + 1 %}
 
 package:
@@ -7,7 +7,6 @@ package:
 
 build:
   number: 0
-  skip: True  # [s390x or (osx and x86_64)]
   run_exports:
     - {{ pin_subpackage('qt-main', max_pin='x.x') }}
 
@@ -23,6 +22,7 @@ requirements:
     - qt5compat >={{ version }},<{{ next_major_version }}
     - qtwebsockets >={{ version }},<{{ next_major_version }}
     - qtwebchannel >={{ version }},<{{ next_major_version }}
+    - qtwayland >={{ version }},<{{ next_major_version }}  # [linux]
 
 about:
   home: https://www.qt.io
