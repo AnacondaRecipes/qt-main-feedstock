@@ -1,5 +1,4 @@
-{% set version = "6.9.1" %}
-{% set next_major_version = version.split(".")[0] | int + 1 %}
+{% set version = "6.9.2" %}
 
 package:
   name: qt-main
@@ -7,22 +6,93 @@ package:
 
 build:
   number: 0
+  # https://doc.qt.io/qt-6/qt-releases.html#binary-compatibility
   run_exports:
     - {{ pin_subpackage('qt-main', max_pin='x.x') }}
 
 requirements:
+  host:
+    - qtbase {{ version }}
+    - qtsvg {{ version }}
+    - qtshadertools {{ version }}
+    - qtdeclarative {{ version }}
+    - qtimageformats {{ version }}
+    - qttools {{ version }}
+    - qttranslations {{ version }}
+    - qt5compat {{ version }}
+    - qtwebsockets {{ version }}
+    - qtwebchannel {{ version }}
+    - qtwayland {{ version }}  # [linux]
   run:
-    - qtbase >={{ version }},<{{ next_major_version }}
-    - qtsvg >={{ version }},<{{ next_major_version }}
-    - qtshadertools >={{ version }},<{{ next_major_version }}
-    - qtdeclarative >={{ version }},<{{ next_major_version }}
-    - qtimageformats >={{ version }},<{{ next_major_version }}
-    - qttools >={{ version }},<{{ next_major_version }}
-    - qttranslations >={{ version }},<{{ next_major_version }}
-    - qt5compat >={{ version }},<{{ next_major_version }}
-    - qtwebsockets >={{ version }},<{{ next_major_version }}
-    - qtwebchannel >={{ version }},<{{ next_major_version }}
-    - qtwayland >={{ version }},<{{ next_major_version }}  # [linux]
+    # Exact version handled through qtbase.
+    - qtbase-devel
+
+{% set qt_libs = [
+  # Qt5Compat
+  "Core5Compat",
+
+  # QtBase
+  "Concurrent",
+  "Core",
+  "DBus",
+  "Gui",
+  "Network",
+  "OpenGL",
+  "OpenGLWidgets",
+  "Platform",
+  "PrintSupport",
+  "Sql",
+  "Test",
+  "Widgets",
+  "Xml",
+
+  # QtDeclarative
+  "LabsPlatform",
+  "Qml",
+  "QmlCompiler",
+  "QmlCore",
+  "QmlModels",
+  "Quick",
+  "QuickControls2",
+  "QuickDialogs2",
+  "QuickTest",
+  "QuickWidgets",
+
+  # QtShaderTools
+  "ShaderTools",
+
+  # QtSvg
+  "Svg",
+  "SvgWidgets",
+
+  # QtTools
+  "Designer",
+  "Help",
+  "Linguist",
+  "UiPlugin",
+  "UiTools",
+
+  # QtWayland
+  "WaylandClient",              # [linux]
+  "WaylandCompositor",          # [linux]
+  "WaylandCompositorWLShell",   # [linux]
+  "WaylandCompositorXdgShell",  # [linux]
+
+  # QtWebChannel
+  "WebChannel",
+  "WebChannelQuick",
+
+  # QtWebSockets
+  "WebSockets",
+] %}
+
+test:
+  requires:
+    - pkg-config
+  commands:
+{% for lib_name in qt_libs %}
+    - pkg-config --exists --print-errors "Qt6{{ lib_name }} >= {{ version }} Qt6{{ lib_name }} < 7"  # [unix]
+{% endfor %}
 
 about:
   home: https://www.qt.io
