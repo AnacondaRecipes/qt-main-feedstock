@@ -52,9 +52,11 @@ source:
 
       # https://github.com/conda-forge/qt-main-feedstock/pull/282#issuecomment-2349349013
       # icu 75 requires C++17, so enable it also in the dummy compilation of a icu snippet that qmake does for configuration
-      - patches/qt/0019-use-cxx17-for-icu-config-tests.patch
+      #- patches/qt/0019-use-cxx17-for-icu-config-tests.patch
       # similarly, mapbox-gl-native uses icu, so we need to make sure that it compiles with C++17
-      - patches/qt/0020-compile-mapbox-gl-native-with-cxx17-for-icu75-compat.patch
+      #- patches/qt/0020-compile-mapbox-gl-native-with-cxx17-for-icu75-compat.patch
+      # commented as Anaconda is using icu 73.1
+
       # mapbox-gl-native uses a old vendored boost, make sure that we used an up-to-date boost instead
       - patches/qt/0021-unvendor-boost-from-mapbox-gl-native.patch
       # Taken from debian for gcc 13 compatibility
