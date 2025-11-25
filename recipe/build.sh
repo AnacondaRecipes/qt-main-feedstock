@@ -117,13 +117,17 @@ if [[ $(uname) == "Linux" ]]; then
                 -system-libjpeg \
                 -system-libpng \
                 -system-zlib \
+                -system-harfbuzz \
                 -system-sqlite \
                 -plugin-sql-sqlite \
                 -plugin-sql-mysql \
                 -plugin-sql-psql \
+                -egl \
+                -eglfs \
+                -xcb \
+                -xcb-xlib \
                 -qt-pcre \
                 -xkbcommon \
-                -xcb -xcb-xlib \
                 -dbus \
                 -no-linuxfb \
                 -no-libudev \
