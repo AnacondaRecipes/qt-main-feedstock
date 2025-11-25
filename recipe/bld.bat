@@ -32,8 +32,9 @@ set LLVM_INSTALL_DIR=%PREFIX%\Library
 :: Compilation fails due to long path names in the case of angle
 :: We create a symlink to the actual folder and then instruct Qt
 :: to locate angle under our symlink
-mklink /D %cd%\angle %cd%\qtbase\src\3rdparty\angle
-set ANGLE_DIR=%cd%\angle
+:: CB trying without this for now, as it fails on windows
+:: mklink /D %cd%\angle %cd%\qtbase\src\3rdparty\angle
+:: set ANGLE_DIR=%cd%\angle
 
 set QT_LIBINFIX=_conda
 
