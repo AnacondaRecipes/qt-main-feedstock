@@ -138,7 +138,7 @@ requirements:
     - zlib {{ zlib }}
     - libxcb {{ libxcb }}               # [linux]
     - openssl {{ openssl }}
-    - krb5 {{ krb5 }}
+    - libkrb5 {{ libkrb5 }}
     - harfbuzz {{ harfbuzz }}           # [linux]
     # OpenGL support
     - libdrm {{ libdrm }}                            # [linux]
@@ -147,13 +147,13 @@ requirements:
     # For QDoc
     # http://doc.qt.io/Qt-5/qdoc-guide-clang.html
     # Only libclang is needed, but needs the full package for detection.
-    - llvmdev  20.1.8
+    - llvm 20.1.8  
     - clangdev 20.1.8
     # Ensure that build and host have the same clang version on osx
     # otherwise qt6 may be out of sync compared to the pinned compiler
     # version
     - libclang     {{ cxx_compiler_version }}     # [osx]
-    - libclang-cpp {{ cxx_compiler_version }}     # [osx]
+    - libclang                                    # [not osx]
     - libcups {{ libcups }}                       # [linux]
     - zstd {{ zstd }}
     # The xcb-util packages are necessary to build the Qt xcb plugin.
