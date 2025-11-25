@@ -125,7 +125,7 @@ requirements:
     - gst-plugins-base {{ gst_plugins_base }} # [not win]
     - gstreamer {{ gstreamer }}          # [not win]
     - libxkbcommon {{ libxkbcommon }}    # [linux]
-    - icu {{ icu }}                      # [unix]
+    - icu {{ icu }}
     # jpeg-turbo currently has some conflicting issues in conda-forge
     # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
     - jpeg {{ jpeg }}
