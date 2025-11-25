@@ -1,0 +1,12 @@
+See: https://github.com/Tencent/rapidjson/issues/718
+--- ./qtlocation/src/3rdparty/mapbox-gl-native/deps/rapidjson/1.1.0/include/rapidjson/document.h	2020-10-27 04:02:12
++++ ./qtlocation/src/3rdparty/mapbox-gl-native/deps/rapidjson/1.1.0/include/rapidjson/document copy.h	2025-11-25 16:48:04
+@@ -315,8 +315,6 @@
+         : s(str), length(len) { RAPIDJSON_ASSERT(s != 0); }
+ 
+     GenericStringRef(const GenericStringRef& rhs) : s(rhs.s), length(rhs.length) {}
+-
+-    GenericStringRef& operator=(const GenericStringRef& rhs) { s = rhs.s; length = rhs.length; }
+ 
+     //! implicit conversion to plain CharType pointer
+     operator const Ch *() const { return s; }
