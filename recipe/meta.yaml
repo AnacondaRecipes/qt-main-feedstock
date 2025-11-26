@@ -152,8 +152,8 @@ requirements:
     # Ensure that build and host have the same clang version on osx
     # otherwise qt6 may be out of sync compared to the pinned compiler
     # version
-    - libclang     {{ cxx_compiler_version }}     # [osx]
-    - libclang                                    # [not osx]
+    - libclang {{ cxx_compiler_version }}         # [osx]
+    - libclang 20.1.8                             # [not osx]
     - libcups {{ libcups }}                       # [linux]
     - zstd {{ zstd }}
     # The xcb-util packages are necessary to build the Qt xcb plugin.
@@ -216,6 +216,7 @@ about:
 extra:
   skip-lints:
     - has_run_test_and_commands
+    - should_use_compilers
   recipe-maintainers:
     - andfoy
     - ccordoba12
