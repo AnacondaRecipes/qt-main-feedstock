@@ -85,14 +85,14 @@ build:
   detect_binary_files_with_prefix: true
   run_exports:
     - {{ pin_subpackage('qt-main', max_pin='x.x') }}
-  missing_dso_whitelist:  # [osx]
+  missing_dso_whitelist:
     - /usr/lib/libbsm.0.dylib  # [osx]
     - /usr/lib/libcups.2.dylib  # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libsandbox.1.dylib  # [osx]
     - '/System/Library/Frameworks/CoreLocation.framework/**'  # [osx]
-    #- '*/api-ms-win-core-winrt-l1-1-0.dll'  # [win]
-    #- '*/api-ms-win-core-winrt-string-l1-1-0.dll'  # [win]
+    - $RPATH/api-ms-win-core-winrt-l1-1-0.dll         # [win]
+    - $RPATH/api-ms-win-core-winrt-string-l1-1-0.dll  # [win]
 
 requirements:
   build:
