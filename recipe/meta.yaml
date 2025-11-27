@@ -177,7 +177,7 @@ requirements:
     # qtlocation requires mapbox-gl-native that uses libbost-headers
     - libboost-headers {{ libboost_devel }}
   run:
-    # bounds throuhg run_exports
+    # bounds through run_exports
   run_constrained:
     - qt >=5.15.2,<6
 test:
