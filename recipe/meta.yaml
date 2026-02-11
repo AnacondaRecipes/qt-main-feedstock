@@ -1,7 +1,8 @@
-{% set version = "6.9.2" %}
+{% set name = "qt-main" %}
+{% set version = "6.10.1" %}
 
 package:
-  name: qt-main
+  name: {{ name }}
   version: {{ version }}
 
 build:
@@ -45,6 +46,7 @@ requirements:
   "Test",
   "Widgets",
   "Xml",
+  "WaylandClient",              # [linux]
 
   # QtDeclarative
   "LabsPlatform",
@@ -73,7 +75,6 @@ requirements:
   "UiTools",
 
   # QtWayland
-  "WaylandClient",              # [linux]
   "WaylandCompositor",          # [linux]
   "WaylandCompositorWLShell",   # [linux]
   "WaylandCompositorXdgShell",  # [linux]
