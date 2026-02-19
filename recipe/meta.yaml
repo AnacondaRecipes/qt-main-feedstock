@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 build:
-  number: 0
+  number: 1
   # https://doc.qt.io/qt-6/qt-releases.html#binary-compatibility
   run_exports:
     - {{ pin_subpackage('qt-main', max_pin='x.x') }}
@@ -29,10 +29,8 @@ requirements:
     - qtbase-devel
 
 {% set qt_libs = [
-  # Qt5Compat
   "Core5Compat",
 
-  # QtBase
   "Concurrent",
   "Core",
   "DBus",
@@ -48,7 +46,6 @@ requirements:
   "Xml",
   "WaylandClient",              # [linux]
 
-  # QtDeclarative
   "LabsPlatform",
   "Qml",
   "QmlCompiler",
@@ -60,30 +57,24 @@ requirements:
   "QuickTest",
   "QuickWidgets",
 
-  # QtShaderTools
   "ShaderTools",
 
-  # QtSvg
   "Svg",
   "SvgWidgets",
 
-  # QtTools
   "Designer",
   "Help",
   "Linguist",
   "UiPlugin",
   "UiTools",
 
-  # QtWayland
   "WaylandCompositor",          # [linux]
   "WaylandCompositorWLShell",   # [linux]
   "WaylandCompositorXdgShell",  # [linux]
 
-  # QtWebChannel
   "WebChannel",
   "WebChannelQuick",
 
-  # QtWebSockets
   "WebSockets",
 ] %}
 
