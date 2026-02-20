@@ -28,63 +28,59 @@ requirements:
     # Exact version handled through qtbase.
     - qtbase-devel
 
-{% set qt_libs = [
-  "Core5Compat",
-
-  "Concurrent",
-  "Core",
-  "DBus",
-  "Gui",
-  "Network",
-  "OpenGL",
-  "OpenGLWidgets",
-  "Platform",
-  "PrintSupport",
-  "Sql",
-  "Test",
-  "Widgets",
-  "Xml",
-  "WaylandClient",              # [linux]
-
-  "LabsPlatform",
-  "Qml",
-  "QmlCompiler",
-  "QmlCore",
-  "QmlModels",
-  "Quick",
-  "QuickControls2",
-  "QuickDialogs2",
-  "QuickTest",
-  "QuickWidgets",
-
-  "ShaderTools",
-
-  "Svg",
-  "SvgWidgets",
-
-  "Designer",
-  "Help",
-  "Linguist",
-  "UiPlugin",
-  "UiTools",
-
-  "WaylandCompositor",          # [linux]
-  "WaylandCompositorWLShell",   # [linux]
-  "WaylandCompositorXdgShell",  # [linux]
-
-  "WebChannel",
-  "WebChannelQuick",
-
-  "WebSockets",
-] %}
-
 test:
   requires:
     - pkg-config
   commands:
-{% for lib_name in qt_libs %}
-    - pkg-config --exists --print-errors "Qt6{{ lib_name }} >= {{ version }} Qt6{{ lib_name }} < 7"  # [unix]
-{% endfor %}
+    # Qt5Compat
+    - pkg-config --exists --print-errors "Qt6Core5Compat >= {{ version }} Qt6Core5Compat < 7"  # [unix]
+    # QtBase
+    - pkg-config --exists --print-errors "Qt6Concurrent >= {{ version }} Qt6Concurrent < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Core >= {{ version }} Qt6Core < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6DBus >= {{ version }} Qt6DBus < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Gui >= {{ version }} Qt6Gui < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Network >= {{ version }} Qt6Network < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6OpenGL >= {{ version }} Qt6OpenGL < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6OpenGLWidgets >= {{ version }} Qt6OpenGLWidgets < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Platform >= {{ version }} Qt6Platform < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6PrintSupport >= {{ version }} Qt6PrintSupport < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Sql >= {{ version }} Qt6Sql < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Test >= {{ version }} Qt6Test < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Widgets >= {{ version }} Qt6Widgets < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Xml >= {{ version }} Qt6Xml < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6WaylandClient >= {{ version }} Qt6WaylandClient < 7"  # [linux]
+    # QtDeclarative
+    - pkg-config --exists --print-errors "Qt6LabsPlatform >= {{ version }} Qt6LabsPlatform < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Qml >= {{ version }} Qt6Qml < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6QmlCompiler >= {{ version }} Qt6QmlCompiler < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6QmlCore >= {{ version }} Qt6QmlCore < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6QmlModels >= {{ version }} Qt6QmlModels < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Quick >= {{ version }} Qt6Quick < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6QuickControls2 >= {{ version }} Qt6QuickControls2 < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6QuickDialogs2 >= {{ version }} Qt6QuickDialogs2 < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6QuickTest >= {{ version }} Qt6QuickTest < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6QuickWidgets >= {{ version }} Qt6QuickWidgets < 7"  # [unix]
+    # QtShaderTools
+    - pkg-config --exists --print-errors "Qt6ShaderTools >= {{ version }} Qt6ShaderTools < 7"  # [unix]
+    # QtSvg
+    - pkg-config --exists --print-errors "Qt6Svg >= {{ version }} Qt6Svg < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6SvgWidgets >= {{ version }} Qt6SvgWidgets < 7"  # [unix]
+    # QtTools
+    - pkg-config --exists --print-errors "Qt6Designer >= {{ version }} Qt6Designer < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Help >= {{ version }} Qt6Help < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6Linguist >= {{ version }} Qt6Linguist < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6UiPlugin >= {{ version }} Qt6UiPlugin < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6UiTools >= {{ version }} Qt6UiTools < 7"  # [unix]
+    # QtWayland
+    - pkg-config --exists --print-errors "Qt6WaylandCompositor >= {{ version }} Qt6WaylandCompositor < 7"  # [linux]
+    - pkg-config --exists --print-errors "Qt6WaylandCompositorWLShell >= {{ version }} Qt6WaylandCompositorWLShell < 7"  # [linux]
+    - pkg-config --exists --print-errors "Qt6WaylandCompositorXdgShell >= {{ version }} Qt6WaylandCompositorXdgShell < 7"  # [linux]
+    # QtWebChannel
+    - pkg-config --exists --print-errors "Qt6WebChannel >= {{ version }} Qt6WebChannel < 7"  # [unix]
+    - pkg-config --exists --print-errors "Qt6WebChannelQuick >= {{ version }} Qt6WebChannelQuick < 7"  # [unix]
+    # QtWebSockets
+    - pkg-config --exists --print-errors "Qt6WebSockets >= {{ version }} Qt6WebSockets < 7"  # [unix]
+
 
 about:
   home: https://www.qt.io
