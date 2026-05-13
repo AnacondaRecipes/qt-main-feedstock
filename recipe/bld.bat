@@ -1,5 +1,6 @@
 @echo on
 
+:: Workaround for long path issues
 subst Y: "%SRC_DIR%"
 subst X: "%PREFIX%"
 set SRC_DIR=Y:
