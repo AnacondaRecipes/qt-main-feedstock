@@ -1,6 +1,15 @@
 @echo on
-pushd qt
 
+subst Y: "%SRC_DIR%"
+subst X: "%PREFIX%"
+set SRC_DIR=Y:
+set PREFIX=X:
+set LIBRARY_PREFIX=X:\Library
+set LIBRARY_BIN=X:\Library\bin
+set LIBRARY_LIB=X:\Library\lib
+set LIBRARY_INC=X:\Library\include
+
+pushd Y:\qt
 set NINJAFLAGS="-j3"
 
 setlocal EnableExtensions EnableDelayedExpansion
@@ -131,3 +140,6 @@ popd
 if not exist %PREFIX%\Scripts mkdir %PREFIX%\Scripts
 copy "%RECIPE_DIR%\write_qtconf.bat" "%PREFIX%\Scripts\.qt-post-link.bat"
 if %errorlevel% neq 0 exit /b %errorlevel%
+
+subst Y: /d
+subst X: /d
