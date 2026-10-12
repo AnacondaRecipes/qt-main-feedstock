@@ -1,5 +1,5 @@
 {% set name = "qt-main" %}
-{% set version = "6.11.0" %}
+{% set version = "6.12.0" %}
 
 package:
   name: {{ name }}
@@ -9,7 +9,7 @@ build:
   number: 0
   # https://doc.qt.io/qt-6/qt-releases.html#binary-compatibility
   run_exports:
-    - {{ pin_subpackage('qt-main', max_pin='x.x') }}
+    - {{ pin_subpackage('qt-main', max_pin='x.x.x') }}
 
 requirements:
   host:
